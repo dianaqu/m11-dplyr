@@ -39,12 +39,18 @@ mean(flights.seatac$time.in.air, na.rm = TRUE)
 # Write a function that allows you to specify an origin, a destination, and a column of interest
 # that returns a data.frame of flights from the origin to the destination and only the column of interest
 ## Hint: see chapter 11 section on standard evaluation
-
+OriginDestInterest <- function(my.origin, my.destination, interest) {
+  filtered <- filter(flights, origin == my.origin, dest == my.destination)
+  result <- select_(filtered, interest)
+  return(result)
+}
 
 # Retireve the air_time column for flights from JFK to SEA
-
+jfk.to.sea <- OriginDestInterest('JFK', 'SEA', 'air_time')
 
 # What was the average air time of those flights (in hours)?  
-
+mean(jfk.to.sea$air_time, na.rm = TRUE)/60
 
 # What was the min/max average air time for the JFK to SEA flights?
+min(jfk.to.sea$air_time, na.rm = TRUE)/60
+max(jfk.to.sea$air_time, na.rm = TRUE)/60
