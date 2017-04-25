@@ -21,4 +21,4 @@ group_by(flights, airport = dest) %>% summarise(delay = mean(arr_delay, na.rm = 
 ### Bonus ###
 # Which city was flown to with the highest average speed?
 # distance / air_time 
-flights %>% group_by(dest) %>% mutate(speed = distance / air_time) %>% summarise(avg.speed = mean(speed))
+flights %>% mutate(speed = distance / air_time) %>% group_by(dest) %>% summarise(avg.speed = mean(speed, na.rm = TRUE)) %>% arrange(-avg.speed)
