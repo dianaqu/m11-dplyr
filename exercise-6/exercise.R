@@ -15,7 +15,7 @@ avg.arr.delay <- flights %>% group_by(dest) %>% summarise(arr.delay = mean(arr_d
 # to join on the "airlines" dataframe, which has the airline info
 avg.airline.delay <- flights %>% group_by(carrier) %>% summarise(arr.delay = mean(arr_delay, na.rm = TRUE)) %>% left_join(airlines, by = 'carrier') %>% arrange(-arr.delay)
 
-
+#
 ### Bonus ###
 # Calculate the average delay by city AND airline, then merge on the city and airline information
 avg_city_airline <- flights %>% group_by(dest, carrier) %>% summarise(arr.delay = mean(arr_delay, na.rm = TRUE)) %>% left_join(airlines, by='carrier') %>% mutate(faa = dest) %>% left_join(airports, by = 'faa')
